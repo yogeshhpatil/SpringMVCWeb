@@ -1,7 +1,7 @@
 
 //table to create
 
-CREATE TABLE Emp99 (
+CREATE TABLE Employee (
   `ID` int(10) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(45) DEFAULT NULL,
   `SALARY` varchar(45) DEFAULT NULL,

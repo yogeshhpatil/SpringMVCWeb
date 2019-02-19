@@ -1,40 +1,42 @@
-
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
 
-<h1>Edit Employee</h1>
+<head>
+	<title>Edit Employee</title>
+</head>
 
-<form:form method="post" action="editsave">
-	<table >
-		<tr>
-			<td></td>
-			<td>
-				<form:hidden  path="id" />
-			</td>
-		</tr>
-		<tr>
-			<td>Name : </td>
-			<td>
-				<form:input path="name"  />
-			</td>
-		</tr>
-		<tr>
-			<td>Salary :</td>
-			<td>
-				<form:input path="salary" />
-			</td>
-		</tr>
-		<tr>
-			<td>Designation :</td>
-			<td>
-				<form:input path="designation" />
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<input type="submit" value="Edit Save" />
-			</td>
-		</tr>
-	</table>
-</form:form>
+<body>
+	<center>
+		<h1>Edit Employee</h1>
+
+		<form action="editsave" method="POST">
+			<table>
+				<tr>
+					<td>Id</td>
+					<td><input type="number" name="id" value="${employee.id}" readonly></td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td><input type="text" name="name" value="${employee.name}"></td>
+				</tr>
+				<tr>
+					<td>Salary</td>
+					<td><input type="text" name="salary" value="${employee.salary}"></td>
+				</tr>
+				<tr>
+					<td>Designation</td>
+					<td><input type="text" name="designation" value="${employee.designation}"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Update Emp"></td>
+				</tr>
+			</table>
+
+		</form>
+	</center>
+
+</body>
+
+</html>

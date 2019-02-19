@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class EmpDAO {
+public class EmployeeDAO {
     JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
@@ -18,23 +18,23 @@ public class EmpDAO {
     }
 
     public int save(Employee p){
-        String sql="insert into Emp99(name,salary,designation) values('"+p.getName()+"',"+p.getSalary()+",'"+p.getDesignation()+"')";
+        String sql="insert into Employee(name,salary,designation) values('"+p.getName()+"',"+p.getSalary()+",'"+p.getDesignation()+"')";
         return template.update(sql);
     }
     public int update(Employee p){
-        String sql="update Emp99 set name='"+p.getName()+"', salary="+p.getSalary()+", designation='"+p.getDesignation()+"' where id="+p.getId()+"";
+        String sql="update Employee set name='"+p.getName()+"', salary="+p.getSalary()+", designation='"+p.getDesignation()+"' where id="+p.getId()+"";
         return template.update(sql);
     }
     public int delete(int id){
-        String sql="delete from Emp99 where id="+id+"";
+        String sql="delete from Employee where id="+id+"";
         return template.update(sql);
     }
     public Employee getEmpById(int id){
-        String sql="select * from Emp99 where id=?";
+        String sql="select * from Employee where id=?";
         return template.queryForObject(sql, new Object[]{id},new BeanPropertyRowMapper<Employee>(Employee.class));
     }
     public List<Employee> getEmployees(){
-        return template.query("select * from Emp99",new RowMapper<Employee>(){
+        return template.query("select * from Employee",new RowMapper<Employee>(){
             public Employee mapRow(ResultSet rs, int row) throws SQLException {
                 Employee e=new Employee();
                 e.setId(rs.getInt(1));

@@ -37,4 +37,14 @@ public class Employee {
     public void setDesignation(String designation) {
         this.designation = designation;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", designation='" + designation + '\'' +
+                '}';
+    }
 }

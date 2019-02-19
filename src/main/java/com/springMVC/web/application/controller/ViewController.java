@@ -2,7 +2,7 @@ package com.springMVC.web.application.controller;
 
 
 import com.springMVC.web.application.bo.Employee;
-import com.springMVC.web.application.dao.EmpDAO;
+import com.springMVC.web.application.dao.EmployeeDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,48 +13,41 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-
 @Controller
 public class ViewController {
 
     @Autowired
-    private EmpDAO dao;
+    private EmployeeDAO dao;
 
-    /*It displays a form to input data, here "command" is a reserved request attribute
-     *which is used to display object data into form
-     */
     @RequestMapping("/empform")
     public ModelAndView showform(){
         return new ModelAndView("empform","command",new Employee());
     }
-    /*It saves object into database. The @ModelAttribute puts request data
-     *  into model object. You need to mention RequestMethod.POST method
-     *  because default request is GET*/
+
     @RequestMapping(value="/save",method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute("employee") Employee employee){
         dao.save(employee);
-        return new ModelAndView("redirect:/viewemp");//will redirect to viewemp request mapping
+        return new ModelAndView("redirect:/viewemp");
     }
-    /* It provides list of employees in model object */
+
     @RequestMapping("/viewemp")
     public ModelAndView viewemp(){
         List<Employee> list=dao.getEmployees();
         return new ModelAndView("viewemp","list",list);
     }
-    /* It displays object data into form for the given id.
-     * The @PathVariable puts URL data into variable.*/
+
     @RequestMapping(value="/editemp/{id}")
     public ModelAndView edit(@PathVariable int id){
         Employee employee =dao.getEmpById(id);
-        return new ModelAndView("empeditform","command", employee);
+        return new ModelAndView("empeditform","employee", employee);
     }
-    /* It updates model object. */
-    @RequestMapping(value="/editsave",method = RequestMethod.POST)
-    public ModelAndView editsave(@ModelAttribute("employee") Employee employee){
+
+    @RequestMapping(value="/editemp/editsave",method = RequestMethod.POST)
+    public ModelAndView editsave(@ModelAttribute Employee employee){
         dao.update(employee);
         return new ModelAndView("redirect:/viewemp");
     }
-    /* It deletes record for the given id in URL and redirects to /viewemp */
+
     @RequestMapping(value="/deleteemp/{id}",method = RequestMethod.GET)
     public ModelAndView delete(@PathVariable int id){
         dao.delete(id);
